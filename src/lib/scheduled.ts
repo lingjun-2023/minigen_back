@@ -2,6 +2,7 @@ import Serie, { ISerie } from "../models/Serie"
 import Video, { IVideo } from "../models/Video";
 import { openai } from "./openai";
 import schedule from 'node-schedule'
+import { uploadYoutubeVideo } from "./uploadVideo";
 
 const processMessage = (message: string) => {
     if (message.startsWith('```json')) {
@@ -133,7 +134,7 @@ export const setScheduled = async () => {
                 schedule.scheduleJob(publishTime, function(){
                     // console.log(`发布视频 ${video.title}，发布时间: ${publishTime}`);
                     // 在这里执行发布视频的代码，比如调用上传视频到YouTube的功能
-                    publishVideo()
+                    // await uploadYoutubeVideo()
                 });
             });
         }
