@@ -6,10 +6,26 @@ import { generateAll } from "./lib/steps";
 import connectDB from "./lib/db";
 import Video, { IVideo } from "./models/Video";
 import Serie from "./models/Serie"
+import { generateVideoScript, setScheduled } from "./lib/scheduled";
 
 
 import dotenv from 'dotenv';
 dotenv.config();
+
+
+/**
+ *  6.16 补充
+ *  定时发送视频的逻辑
+ *  一、 生成视频脚本
+ *      1. 获取 所有 series 数据，查看下一个发送日期
+ *      2. 对比时间，如果与当下时间相比，时差小于一天，那么创建视频脚本，VIDEO，设置状态为pending。
+ *      3. 等待生成视频API获取然后生成视频即可
+ * 
+ *  二、 设置定时任务
+ *      1. 获取所有ready状态的Video数据。
+ *      2. 为其设置定时发布任务
+ */
+
 
 const app = express();
 const port = process.env.PORT || 3001;
@@ -32,10 +48,6 @@ app.get('/', (req, res) => {
   3. 等待发送到绑定的账号中。
 */
 
-/**
- * 
- * 
- */
 
 (async () => {
   try {
@@ -76,6 +88,25 @@ setInterval(async () => {
 }, 15000);
 
 
+// *  一、 生成视频脚本
+setInterval(async () => {
+  try {
+    await generateVideoScript()
+  } catch (error) {
+    console.error('请求失败:', error);
+  }
+  //一小时检查一次
+}, 3600000);
+
+// 设置定时任务
+setInterval(async () => {
+  try {
+    await setScheduled()
+  } catch (error) {
+    console.error('请求失败:', error);
+  }
+  //一小时检查一次
+}, 3600000);
 
 app.listen(port, () => {
   console.log(`listening at 端口 ${port}`)

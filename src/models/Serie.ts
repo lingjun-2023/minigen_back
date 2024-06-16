@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import { IVideo } from "./Video";
+import { IBillingPlan } from "./BillingPlan";
 
 const { Schema } = mongoose;
 
@@ -18,7 +19,7 @@ export interface ISerie {
     duration: string,
     account: IAccount[],
     owner: string,
-    video?: string[],
+    video: IVideo[],
     youTubeVisibility: 'Private' | 'Public',
     tikTokVisibility: 'Private' | 'Public',
     allowUsersTo: {
@@ -28,7 +29,9 @@ export interface ISerie {
     },
     watermarkText?: string,
     createdAt: string,
-    updatedAt: string
+    updatedAt: string,
+    billingPlan:IBillingPlan,
+    nextPublishDate:number
 }
 
 const serieSchema = new Schema(
@@ -95,6 +98,15 @@ const serieSchema = new Schema(
         },
         watermarkText: {
             type: String,
+            required: false,
+        },
+        billingPlan: {
+            type: Schema.Types.ObjectId,
+            ref: "BillingPlan",
+            required: false,
+        },
+        nextPublishDate: {
+            type: Number,
             required: false,
         }
     },
