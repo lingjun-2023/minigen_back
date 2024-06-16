@@ -1,0 +1,28 @@
+1
+00:00:00,000 --> 00:00:01,100
+Dahulu kala di
+
+2
+00:00:01,100 --> 00:00:01,840
+tanah yang jauh
+
+3
+00:00:01,840 --> 00:00:02,400
+di balik bukit
+
+4
+00:00:02,400 --> 00:00:03,519
+bukit yang hijau
+
+5
+00:00:03,880 --> 00:00:04,739
+terdapat sebuah pohon
+
+6
+00:00:04,739 --> 00:00:06,119
+megah yang dikenal
+
+7
+00:00:06,119 --> 00:00:07,159
+sebagai pohon mimpi
+
