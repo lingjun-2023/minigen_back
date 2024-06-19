@@ -23,7 +23,8 @@
     "mongodb": "^6.3.0",
     "mongoose": "^8.1.0",
     "node-schedule": "^2.1.1",
-    "openai": "^4.51.0"
+    "openai": "^4.51.0",
+    "stripe": "^15.12.0"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",
